@@ -1,0 +1,40 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+    \usepackage{amsmath}
+    \usepackage{tikz}
+    \usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Edgar Jacob Rivera Rios - A01184125}
+
+\begin{document}
+\section*{Problems}
+\begin{enumerate}
+    \item Use  the  substitution  method  to  solve  the  following  recurrences  and  determine  their  corresponding complexity. Establish the proper initial conditions for each problem.
+    \begin{enumerate}
+        \item $T(n) = 4T(n/2) + n^4$
+        \begin{equation*}
+            T(n)=\begin{cases}
+              b & \text{if $n = 1$}.\\
+              aT(\frac{n}{c}) + bn^x, & \text{otherwise}.
+            \end{cases}
+        \end{equation*}
+
+        \begin{align*}
+            T(n) &= 4 T(n/2) + n^4\\
+            &= 4(4T(\frac{n}{2^2}) + (\frac{n}{2^2})^4) + n^4\\
+            &= 4^2(4T(\frac{n}{2^3}) + (\frac{n}{2^3})^4 )+ \frac{n^4}{4^3} + n^4\\
+            &= 4^3(4T(\frac{n}{2^4}) + (\frac{n}{2^4})^4)+ \frac{n^4}{4^4} + \frac{n^4}{4^3} + n^4\\
+            &= 4^4(4T(\frac{n}{2^5}) + (\frac{n}{2^5})^4)+ \frac{n^4}{4^5} + \frac{n^4}{4^4} + \frac{n^4}{4^3} + n^4
+        \end{align*}
+
+        \item $T(n) = 3T(n/3) + n\ log\ n$
+        \item $T(n) = 3T(n/2) + \frac{\sqrt{n}}{log\ n}$
+        \item $T(n) = T(n - 3) + n$
+    \end{enumerate}
+\end{enumerate}
+\end{document}
