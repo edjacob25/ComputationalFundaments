@@ -1,0 +1,109 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{tikz}
+    \usepackage{fancyhdr}
+    \usepackage{listings}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Edgar Jacob Rivera Rios - A01184125}
+
+\begin{document}
+\begin{titlepage}
+
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+    \center % Center everything on the page
+
+    %----------------------------------------------------------------------------------------
+    %	HEADING SECTIONS
+    %----------------------------------------------------------------------------------------
+
+    \textsc{\LARGE Tecnológico de Monterrey}\\[1.5cm] % Name of your university/college
+    \textsc{\Large Fundamentos de computación}\\[0.5cm] % Major heading such as course name
+    %\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+    %----------------------------------------------------------------------------------------
+    %	TITLE SECTION
+    %----------------------------------------------------------------------------------------
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries Homework 2}\\[0.4cm] % Title of your document
+    \HRule \\[1.5cm]
+
+    %----------------------------------------------------------------------------------------
+    %	AUTHOR SECTION
+    %----------------------------------------------------------------------------------------
+
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+    \emph{Student:}\\
+    Jacob \textsc{Rivera} % Your name
+    \end{flushleft}
+    \end{minipage}
+    ~
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushright} \large
+    \emph{Professor:} \\
+    Dr. Hugo \textsc{Terashima} % Supervisor's Name
+    \end{flushright}
+    \end{minipage}\\[2cm]
+
+    % If you don't want a supervisor, uncomment the two lines below and remove the section above
+    %\Large \emph{Author:}\\
+    %John \textsc{Smith}\\[3cm] % Your name
+
+    %----------------------------------------------------------------------------------------
+    %	DATE SECTION
+    %----------------------------------------------------------------------------------------
+
+    {\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+    %----------------------------------------------------------------------------------------
+    %	LOGO SECTION
+    %----------------------------------------------------------------------------------------
+
+    \includegraphics[width=0.4\textwidth,height=\textheight,keepaspectratio]{logo-tec-negro.png} % Include a department/university logo - this will require the graphicx package
+
+    %----------------------------------------------------------------------------------------
+
+    \vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+\section{Problems}
+Solve the following problems:
+\begin{enumerate}
+    \item Use  the  substitution  method  to  solve  the  following  recurrences  and  determine  their  corresponding complexity. Establish the proper initial conditions for each problem.
+    \begin{enumerate}
+        \item $T(n) = 4T(n/2) +n^4$
+        \item $T(n) = 3T(n/3) + nlogn$
+        \item $T(n) = 3T(n/3) + \frac{\sqrt{n}}{logn}$
+        \item $T(n) = T(n - 3) +n$
+    \end{enumerate}
+    \item  Modify the algorithm for multiplying two numbers $X$ and $Y$(that with complexity $n^{1,59}$), dividing each number in three parts. Describe the algorithm and derive its complexity. Is it better than dividing by two parts? Explain.
+    \item The run time of an algorithm $A$ for solving a problem is given by the recurrence $T(n) = 7T(n/4) + n.$ A different algorithm $A^{\prime}$ for solving the same problem has a running time given by $T^{\prime}(n) =aT^{\prime}(n/7) +n$. Determine  the  integer  value $a$ with  which  algorithm $A$ is  better  than  algorithm $A^{\prime}$.  Explain  your process.
+    \item For each of the following algorithms, which each receive an integer as input, determine what they do,establish the corresponding recurrence,and solve it to find the computational complexity.
+    \begin{lstlisting}
+    ALGORITHM BR(n)
+        // Input a positive integer n
+        if n = 1 return 1
+        else return BR(floor(n/2)) + 1
+    \end{lstlisting}
+
+    \begin{lstlisting}
+    ALGORITHM Question(n)
+        // Input a positive integer n
+        if n = 1 return 1
+        else return Question(n-1) + n*n*n
+    \end{lstlisting}
+
+    \item The Towers of Hanoi problem is often used as an example when teaching recursion. Six disks of different sizes are piled on a peg in order by size, with the largest at the bottom. There are two empty pegs. The problem is to move all the disks to the third peg by moving only one at a time a never placing a disk on top of a smaller one. The second peg may be used for intermediate moves. The usual solution recursively moves all but the last disk from the starting peg to the spare peg, then moves the remaining disks on the start peg to the destination peg, and then recursively moves all the others from the spare peg to the destination peg. Illustrate these steps and explain the procedure in a pseudocode. Write a recurrence equation to determine the number of moves done and solve it.
+\end{enumerate}
+\end{document}
