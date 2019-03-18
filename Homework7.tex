@@ -8,6 +8,7 @@
     \usepackage{tikz}
     \usepackage{fancyhdr}
     \usepackage{listings}
+    \usepackage{multicol}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -81,6 +82,231 @@
 Solve the following problems:
 \begin{enumerate}
     \item Generate two 4 X 4 matrices and manually apply the Strassen’s method to multiply them. Verify that the result is correct by comparing with the one provided by the traditional method. Show the steps.
+    \begin{multicols}{2}
+        \begin{center}
+            $A=$
+            \begin{tabular}{|c c c c|}
+                \hline
+                1&2&3&4\\
+                5&6&7&8\\
+                9&10&11&12\\
+                13&14&15&16\\
+                \hline
+            \end{tabular}\\
+            $B=$
+            \begin{tabular}{|c c c c|}
+                \hline
+                16&15&14&13\\
+                12&11&10&9\\
+                8&7&6&5\\
+                4&3&2&1\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{multicols}
+    \begin{multicols}{2}
+        \begin{center}
+            $A=$
+            \begin{tabular}{|c c|c c|}
+                \hline
+                1&2&3&4\\
+                5&6&7&8\\
+                \hline
+                9&10&11&12\\
+                13&14&15&16\\
+                \hline
+            \end{tabular}\\
+            $B=$
+            \begin{tabular}{|c c|c c|}
+                \hline
+                16&15&14&13\\
+                12&11&10&9\\
+                \hline
+                8&7&6&5\\
+                4&3&2&1\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{multicols}
+    \begin{multicols}{4}
+        \begin{center}
+            $A_1=$
+            \begin{tabular}{|c c|}
+                \hline
+                1&2\\
+                5&6\\
+                \hline
+            \end{tabular}\\
+            $A_3=$
+            \begin{tabular}{|c c|}
+                \hline
+                9&10\\
+                13&14\\
+                \hline
+            \end{tabular}\\
+            $A_2=$
+            \begin{tabular}{|c c|}
+                \hline
+                3&4\\
+                7&8\\
+                \hline
+            \end{tabular}\\
+            $A_4=$
+            \begin{tabular}{|c c|}
+                \hline
+                11&12\\
+                15&16\\
+                \hline
+            \end{tabular}\\
+            $B_1=$
+            \begin{tabular}{|c c|}
+                \hline
+                16&15\\
+                12&11\\
+                \hline
+            \end{tabular}\\
+            $B_3=$
+            \begin{tabular}{|c c|}
+                \hline
+                8&7\\
+                4&3\\
+                \hline
+            \end{tabular}\\
+            $B_2=$
+            \begin{tabular}{|c c|}
+                \hline
+                14&13\\
+                10&9\\
+                \hline
+            \end{tabular}\\
+            $B_4=$
+            \begin{tabular}{|c c|}
+                \hline
+                6&5\\
+                2&1\\
+                \hline
+            \end{tabular}\\
+        \end{center}
+    \end{multicols}
+
+    \begin{align*}
+        C_1 &= A_1  B_1\\
+        C_2 &= A_2  B_2\\
+        C_3 &= A_3  B_3\\
+        C_4 &= A_4  B_4
+    \end{align*}
+
+    \begin{multicols}{2}
+        \begin{center}
+            $A_1B_1$\\
+            \begin{align*}
+                X_1 &= (1 + 6) * (16 + 11) = 189\\
+                X_2 &= 16 * (5 + 6) = 176\\
+                X_3 &= 1 * (15-11) = 4 \\
+                X_4 &= 6 * (12 - 16) = -24\\
+                X_5 &= 11 * (1 + 2) = 33\\
+                X_6 &= (5 - 1) * (16 + 15) = 124\\
+                X_7 &= (2 - 6) * (12 + 11) = -92\\
+            \end{align*}
+            $C_1=$
+            \begin{tabular}{|c c|}
+                \hline
+                189 + -24 - 33 + -92 &4 + 33\\
+                176 + -24& 189 + 4 - 176 + 124\\
+                \hline
+            \end{tabular}\\
+            $=$
+            \begin{tabular}{|c c|}
+                \hline
+                40&37\\
+                152&141\\
+                \hline
+            \end{tabular}\\
+        \end{center}
+
+        \begin{center}
+            $A_2B_2$\\
+            \begin{align*}
+                X_1 &= (3 + 8) * (14 + 9) = 253\\
+                X_2 &= 14 * (7 + 8) = 210\\
+                X_3 &= 3 * (13-9) = 12 \\
+                X_4 &= 8 * (10 - 14) = -32\\
+                X_5 &= 9 * (3 + 4) = 63 \\
+                X_6 &= (7 - 3) * (14 + 13) = 108\\
+                X_7 &= (4 - 8) * (10 + 9) = -76\\
+            \end{align*}
+            $C_2=$
+            \begin{tabular}{|c c|}
+                \hline
+                253 + -32 - 63 + -76 &12 + 63\\
+                210 + -32& 253 + 12 - 210 + 108\\
+                \hline
+            \end{tabular}\\
+            $=$
+            \begin{tabular}{|c c|}
+                \hline
+                82&75\\
+                178&163\\
+                \hline
+            \end{tabular}\\
+        \end{center}
+    \end{multicols}
+    \pagebreak
+    \begin{multicols}{2}
+        \begin{center}
+            $A_3B_3$\\
+            \begin{align*}
+                X_1 &= (3 + 8) * (14 + 9)  = 253\\
+                X_2 &= 8 * (13 + 14) = 216\\
+                X_3 &= 9 * (7 -3) = 36 \\
+                X_4 &= 14 * (4 - 8) = -56\\
+                X_5 &= 3 * (9 + 10) = 57\\
+                X_6 &= (13 - 9) * (8 + 7) = 60\\
+                X_7 &= (10 - 14) * (4 + 3) = -28\\
+            \end{align*}
+            $C_3=$
+            \begin{tabular}{|c c|}
+                \hline
+                253 + -56 - 57 + -28 &36 + 57\\
+                216 + -56& 253 + 36 - 216 + 60\\
+                \hline
+            \end{tabular}\\
+            $=$
+            \begin{tabular}{|c c|}
+                \hline
+                112&93\\
+                160&133\\
+                \hline
+            \end{tabular}\\
+        \end{center}
+
+        \begin{center}
+            $A_4B_4$\\
+            \begin{align*}
+                X_1 &= (1 + 6) * (16 + 11) = 189\\
+                X_2 &= 6 * (15 + 16) = 186\\
+                X_3 &= 11 * (5-1) = 44\\
+                X_4 &= 16 * (2 - 6) = -64\\
+                X_5 &= 1 * (11 + 12) = 23 \\
+                X_6 &= (15 - 11) * (6 + 5) = 44\\
+                X_7 &= (12 - 16) * (2 + 1) = -12\\
+            \end{align*}
+            $C_4=$
+            \begin{tabular}{|c c|}
+                \hline
+                189 + -64 - 23 + -12 &44 + 23\\
+                186 + -64& 189 + 44 - 186 + 44\\
+                \hline
+            \end{tabular}\\
+            $=$
+            \begin{tabular}{|c c|}
+                \hline
+                90&67\\
+                122&91\\
+                \hline
+            \end{tabular}\\
+        \end{center}
+    \end{multicols}
 
     \item Generate a monic polynomial with $k= 4$ (that is $n= 15$) and solve it using the recursive algorithmpresented in class. show the steps.
 
