@@ -33,12 +33,12 @@ fn main() {
     // }
 }
 
-fn print_vec(arr: &Vec<u32>){
+fn print_vec(arr: &[u32]){
     print!("Array is [");
     for i in arr {
         print!("{},", i);
     }
-    print!("]\n");
+    println!("]");
 }
 
 fn create_numbers_array_base_10(power: u32) -> Vec<u32>{
@@ -55,11 +55,11 @@ fn create_numbers_array(elements: u32) -> Vec<u32>{
     v
 }
 
-fn write_file(v : &Vec<u32>, path: String) -> Result<(),Box<Error>> {
+fn write_file(v : &[u32], path: String) -> Result<(),Box<Error>> {
 
     let mut output = File::create(&path)?;
     for i in v {
-        write!(output, "{}\n", i)?;
+        writeln!(output, "{}", i)?;
     }
     Ok(())
 }
@@ -142,7 +142,7 @@ fn merge(left: Vec<u32>, right: Vec<u32>) -> Vec<u32>{
     let mut result: Vec<u32> = Vec::new();
     let mut left = left;
     let mut right = right;
-    while left.len() > 0 && right.len() > 0 {
+    while !left.is_empty() && !right.is_empty() {
         if left.first() <= right.first(){
             result.push(*left.first().unwrap());
             left.remove(0);
@@ -152,10 +152,10 @@ fn merge(left: Vec<u32>, right: Vec<u32>) -> Vec<u32>{
             right.remove(0);
         }
     }
-    if left.len() > 0{
+    if !left.is_empty(){
         result.append(&mut left);
     }
-    if right.len() > 0{
+    if !right.is_empty() {
         result.append(&mut right);
     }
     return result;
