@@ -11,27 +11,26 @@ use std::io::{Write, BufReader, BufRead};
 fn main() {
     println!("Hello, world!");
 
-    for i in 2..7 {
-        let mut arr = create_numbers_array_base_10(i);
-    //print_vec(&arr);
-        let mut random = "random_".to_string();
-        random.push_str(&i.to_string());
-        write_file(&arr, random).unwrap();
+    let vec = create_numbers_array_base_10(5);
+    let ordered = mergesort(vec);
+    print_vec(&ordered);
 
-        let mut sorted = "sorted_".to_string();
-        sorted.push_str(&i.to_string());
-        arr.sort();
-        write_file(&arr, sorted).unwrap();
+    // for i in 2..7 {
+    //     let mut arr = create_numbers_array_base_10(i);
+    //     let mut random = "random_".to_string();
+    //     random.push_str(&i.to_string());
+    //     write_file(&arr, random).unwrap();
 
-        let mut reverse = "reverse_".to_string();
-        reverse.push_str(&i.to_string());
-        arr.reverse();
-        write_file(&arr, reverse).unwrap();
-    }
-    
-    //let sorted_arr = quicksort(arr);
-    //println!("Sorted array first position is {}", &sorted_arr[0])
-    //print_vec(&sorted_arr);
+    //     let mut sorted = "sorted_".to_string();
+    //     sorted.push_str(&i.to_string());
+    //     arr.sort();
+    //     write_file(&arr, sorted).unwrap();
+
+    //     let mut reverse = "reverse_".to_string();
+    //     reverse.push_str(&i.to_string());
+    //     arr.reverse();
+    //     write_file(&arr, reverse).unwrap();
+    // }
 }
 
 fn print_vec(arr: &Vec<u32>){
@@ -111,6 +110,55 @@ fn quicksort(arr: Vec<u32>) -> Vec<u32>{
     less.append(&mut same);
     less.append(&mut more);
     return less;
+}
+
+fn mergesort(arr: Vec<u32>) -> Vec<u32>{
+    if arr.len() <= 1 {
+        return arr;
+    }
+    let half = arr.len() / 2;
+    let mut left : Vec<u32> = Vec::new();
+    let mut right : Vec<u32> = Vec::new();
+
+    for i in 0..half {
+        left.push(arr[i]);
+    }
+
+     for i in half..arr.len() {
+        right.push(arr[i]);
+    }
+    let mut left = mergesort(left);
+    let mut right = mergesort(right);
+
+    if left.last() <= right.first(){
+        left.append(&mut right);
+        return left;
+    }
+    let result = merge(left, right);
+    return result;
+}
+
+fn merge(left: Vec<u32>, right: Vec<u32>) -> Vec<u32>{
+    let mut result: Vec<u32> = Vec::new();
+    let mut left = left;
+    let mut right = right;
+    while left.len() > 0 && right.len() > 0 {
+        if left.first() <= right.first(){
+            result.push(*left.first().unwrap());
+            left.remove(0);
+        }
+        else {
+            result.push(*right.first().unwrap());
+            right.remove(0);
+        }
+    }
+    if left.len() > 0{
+        result.append(&mut left);
+    }
+    if right.len() > 0{
+        result.append(&mut right);
+    }
+    return result;
 }
 
 #[cfg(test)]
