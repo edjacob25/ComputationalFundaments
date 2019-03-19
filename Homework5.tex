@@ -82,6 +82,21 @@ Solve the following problems:
 \begin{enumerate}
     \item Implement algorithms quicksort, mergesort and heapsort in any programming language, and investigate their performance in arrays of size $10^2$, $10^3$, $10^4$, $10^5$ and $10^6$. For each of those sizes, consider files of  randomly-generated  integers,  files  with  integers  already  sorted  in  ascending  order,  and  files  with integers already sorted in descending order. Hand in a report with your investigation containing the analysis, discussion of results and the conclusions.
 
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            &QS &QS &QS &Merge  &Merge &Merge &Heap &Heap &Heap\\
+            &Random &Ordered &Reverse &Random &Ordered &Reverse &Random &Ordered &Reverse\\
+            \hline
+            $10^2$& $1.75e^{-5}$s & $1.29e^{-5}$s & $1.38e^{-5}$s & & & & & & \\
+            $10^3$& $1.98e^{-4}$s & $1.52e^{-4}$s & $1.58e^{-4}$s & & & & & & \\
+            $10^4$& $2.22e^{-3}$s & $1.6e^{-3}$s & $1.67e^{-3}$s & & & & & & \\
+            $10^5$& $2.42e^{-2}$s & $1.67e^{-2}$s & $1.75e^{-2}$s & & & & & & \\
+            $10^6$& $0.257$s& $0.178$s & $0.184$s & & & & & & \\
+            \hline
+        \end{tabular}
+    \end{center}
+
     \item Consider the 3-ary heap, similar to the binary heap, except that a no-leaf node has 3 siblings
     \begin{enumerate}
         \item How would you represent a 3-ary heap in an array?
