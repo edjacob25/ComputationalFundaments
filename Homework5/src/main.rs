@@ -11,6 +11,11 @@ use std::io::{Write, BufReader, BufRead};
 fn main() {
     println!("Hello, world!");
 
+    let mut vec = create_numbers_array_base_10(2);
+    print_vec(&vec);
+    heapsort(&mut vec);
+    print_vec(&vec);
+
     let vec = create_numbers_array_base_10(5);
     let ordered = mergesort(vec);
     print_vec(&ordered);
@@ -167,6 +172,43 @@ fn merge(left: Vec<u32>, right: Vec<u32>) -> Vec<u32>{
         result.append(&mut right);
     }
     return result;
+}
+
+fn down_heap(a: &mut [u32], i: usize, n: usize) {
+  let mut p = i;
+
+  loop {
+    let q = p;
+
+    let left = (q << 1) + 1;
+    if left < n && a[p] < a[left] {
+      p = left
+    }
+
+    let right = (q << 1) + 2;
+    if right < n && a[p] < a[right] {
+      p = right
+    }
+
+    a.swap(q, p);
+
+    if q == p {
+      break;
+    }
+  }
+}
+
+fn heapsort(a: &mut [u32]) {
+  let len = a.len();
+
+  for i in (0..len/2 + 1).rev()  {
+    down_heap(a, i, len);
+  }
+
+  for i in (1..len).rev() {
+    a.swap(0, i);
+    down_heap(a, 0, i - 1);
+  }
 }
 
 #[cfg(test)]
