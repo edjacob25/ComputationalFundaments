@@ -11,14 +11,14 @@ use std::io::{Write, BufReader, BufRead};
 fn main() {
     println!("Hello, world!");
 
-    let mut vec = create_numbers_array_base_10(2);
-    print_vec(&vec);
-    heapsort(&mut vec);
-    print_vec(&vec);
+    // let mut vec = create_numbers_array_base_10(2);
+    // print_vec(&vec);
+    // heapsort(&mut vec);
+    // print_vec(&vec);
 
-    let vec = create_numbers_array_base_10(5);
-    let ordered = mergesort(vec);
-    print_vec(&ordered);
+    let mut vec = create_numbers_array_base_10(5);
+    mergesort(&mut vec);
+    print_vec(&vec);
 
     //let vec = create_numbers_array_base_10(5);
     //let ordered = quicksort(vec);
@@ -125,53 +125,44 @@ fn quicksort(arr: Vec<u32>) -> Vec<u32>{
     return less;
 }
 
-fn mergesort(arr: Vec<u32>) -> Vec<u32>{
-    if arr.len() <= 1 {
-        return arr;
-    }
-    let half = arr.len() / 2;
-    let mut left : Vec<u32> = Vec::new();
-    let mut right : Vec<u32> = Vec::new();
+fn mergesort(arr: &mut Vec<u32>){
+    let size: usize = arr.len();
+    let mut worker: Vec<u32> = vec![0; size];
 
-    for i in 0..half {
-        left.push(arr[i]);
-    }
-
-     for i in half..arr.len() {
-        right.push(arr[i]);
-    }
-    let mut left = mergesort(left);
-    let mut right = mergesort(right);
-
-    if left.last() <= right.first(){
-        left.append(&mut right);
-        return left;
-    }
-    let result = merge(left, right);
-    return result;
+    merge_split(arr, 0, size, &mut worker);
 }
 
-fn merge(left: Vec<u32>, right: Vec<u32>) -> Vec<u32>{
-    let mut result: Vec<u32> = Vec::new();
-    let mut left = left;
-    let mut right = right;
-    while !left.is_empty() && !right.is_empty() {
-        if left.first() <= right.first(){
-            result.push(*left.first().unwrap());
-            left.remove(0);
+fn merge_split(l1: &mut Vec<u32>, s: usize, e: usize, l2: &mut Vec<u32>) {
+    if e - s > 1 {
+        let m: usize = (e + s) / 2;
+
+        merge_split(l1, s, m, l2);
+        merge_split(l1, m, e, l2);
+        merge(l1, s, m, e, l2);
+        merge_copy(l1, s, e, l2);
+    }
+}
+
+fn merge_copy(l1: &mut Vec<u32>, s: usize, e: usize, l2: &Vec<u32>) {
+    (s..e).for_each(|i| l1[i] = l2[i]);
+}
+
+fn merge(l1: &Vec<u32>, s: usize, m: usize, e: usize, l2: &mut Vec<u32>) {
+    let mut ptr1 = s;
+    let mut ptr2 = m;
+
+    for i in s..e {
+        // Continue to compare elements within each sub-list until one sub-list
+        // is exhausted. If a sub-list is exhausted, then the remaing elements
+        // in the other list are copied over assuming they're already in order.
+        if (ptr1 < m) && (ptr2 >= e || l1[ptr1] <= l1[ptr2]) {
+            l2[i] = l1[ptr1];
+            ptr1 += 1;
+        } else {
+            l2[i] = l1[ptr2];
+            ptr2 += 1;
         }
-        else {
-            result.push(*right.first().unwrap());
-            right.remove(0);
-        }
     }
-    if !left.is_empty(){
-        result.append(&mut left);
-    }
-    if !right.is_empty() {
-        result.append(&mut right);
-    }
-    return result;
 }
 
 fn down_heap(a: &mut [u32], i: usize, n: usize) {
