@@ -15,22 +15,30 @@ fn main() {
     let ordered = mergesort(vec);
     print_vec(&ordered);
 
-    // for i in 2..7 {
-    //     let mut arr = create_numbers_array_base_10(i);
-    //     let mut random = "random_".to_string();
-    //     random.push_str(&i.to_string());
-    //     write_file(&arr, random).unwrap();
+    //let vec = create_numbers_array_base_10(5);
+    //let ordered = quicksort(vec);
+    //print_vec(&ordered);
 
-    //     let mut sorted = "sorted_".to_string();
-    //     sorted.push_str(&i.to_string());
-    //     arr.sort();
-    //     write_file(&arr, sorted).unwrap();
+    //create_files();
+}
 
-    //     let mut reverse = "reverse_".to_string();
-    //     reverse.push_str(&i.to_string());
-    //     arr.reverse();
-    //     write_file(&arr, reverse).unwrap();
-    // }
+fn create_files(){
+    for i in 2..7 {
+        let mut arr = create_numbers_array_base_10(i);
+        let mut random = "random_".to_string();
+        random.push_str(&i.to_string());
+        write_file(&arr, random).unwrap();
+
+        let mut sorted = "sorted_".to_string();
+        sorted.push_str(&i.to_string());
+        arr.sort();
+        write_file(&arr, sorted).unwrap();
+
+        let mut reverse = "reverse_".to_string();
+        reverse.push_str(&i.to_string());
+        arr.reverse();
+        write_file(&arr, reverse).unwrap();
+    }
 }
 
 fn print_vec(arr: &[u32]){
