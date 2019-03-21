@@ -89,18 +89,71 @@ Solve the following problems:
               aT(\frac{n}{c}) + bn^x, & \text{otherwise}.
             \end{cases}
         \end{equation*}
+        \begin{equation*}
+            n = 2^k
+        \end{equation*}
 
         \begin{align*}
-            T(n) &= 4 T(n/2) + n^4\\
-            &= 4(4T(\frac{n}{2^2}) + (\frac{n}{2^2})^4) + n^4\\
-            &= 4^2(4T(\frac{n}{2^3}) + (\frac{n}{2^3})^4 )+ \frac{n^4}{4^3} + n^4\\
-            &= 4^3(4T(\frac{n}{2^4}) + (\frac{n}{2^4})^4)+ \frac{n^4}{4^4} + \frac{n^4}{4^3} + n^4\\
-            &= 4^4(4T(\frac{n}{2^5}) + (\frac{n}{2^5})^4)+ \frac{n^4}{4^5} + \frac{n^4}{4^4} + \frac{n^4}{4^3} + n^4
+            T(n) &= 2^2T(n/2) + n^4\\
+            &= 2^2(2^2T(\frac{n}{2^2}) + (\frac{n}{2})^4) + n^4\\
+            &= 2^4(2^2T(\frac{n}{2^3}) + (\frac{n}{2^2})^4 )+ \frac{n^4}{2^2} + n^4\\
+            &= 2^6(2^2T(\frac{n}{2^4}) + (\frac{n}{2^3})^4)+ \frac{n^4}{2^4} + \frac{n^4}{2^2} + n^4\\
+            &= 2^8T(\frac{n}{2^4}) + \frac{n^4}{2^6}+ \frac{n^4}{2^4} + \frac{n^4}{2^2} + n^4\\
+            &=2^{2k}T(\frac{n}{2^k}) +\sum^{k -1}_{i=0} \frac{n^4}{2^{2i}}\\
+            &=2^{2k}T(\frac{n}{2^k}) +n^4 \sum^{k -1}_{i=0} \frac{1}{2^{2i}}\\
+            &=2^{n}T(0) +n^4 \sum^{k -1}_{i=0} \frac{1}{2^{2i}}\\
+            &=n^4 \sum^{k -1}_{i=0} \frac{1}{2^{2i}}\\
+            &=n^4 \sum^{k -1}_{i=0} 2^{-2i}\\
+            &=n^4 * \frac{1-2^k}{1-2}\\
+            &=n^4\\
+            &\in O(n^4)
         \end{align*}
 
-        \item $T(n) = 3T(n/3) + nlogn$
-        \item $T(n) = 3T(n/3) + \frac{\sqrt{n}}{logn}$
+        \item $T(n) = 3T(n/3) + n log(n)$
+        \begin{equation*}
+            n = 3^k
+        \end{equation*}
+        \begin{align*}
+            T(n) &= 3T(n/3) + n log(n)\\
+            &= 3(3T(\frac{n}{3^2}) + \frac{n}{3} log(\frac{n}{3})) + n log(n)\\
+            &= 3^k T(\frac{n}{3^k}) + \sum_{i =0 }^{k-1} n log(\frac{n}{3^i})\\
+            &= 3^k T(0) + \sum_{i =0 }^{k-1}n log(\frac{n}{3^i})\\
+            &= n \sum_{i =0 }^{k-1} log(\frac{n}{3^i})\\
+            &= n log^2(n) \\
+            &\in n log^2(n)
+        \end{align*}
+
+        \item $T(n) = 3T(n/3) + \frac{\sqrt{n}}{log(n)}$
+        \begin{equation*}
+            n = 3^k
+        \end{equation*}
+        \begin{align*}
+            T(n) &= 3T(n/3) + \frac{\sqrt{n}}{log(n)}\\
+            &= 3(3T(\frac{n}{3^2}) + \frac{\sqrt{n/3}}{log(n/3)}) + \frac{\sqrt{n}}{log(n)}\\
+            &= 3^2T(\frac{n}{3^2}) + 3\frac{\sqrt{n/3}}{log(n/3)}) + \frac{\sqrt{n}}{log(n)}\\
+            &= 3^2(3T(\frac{n}{3^3}) + \frac{\sqrt{n/3}}{log(n/3)}) + 3\frac{\sqrt{n/3}}{log(n/3)} + \frac{\sqrt{n}}{log(n)}\\
+            &= 3^3T(\frac{n}{3^3}) + 3^2\frac{\sqrt{n/3}}{log(n/3)} + 3\frac{\sqrt{n/3}}{log(n/3)} + \frac{\sqrt{n}}{log(n)}\\
+            &= 3^kT(\frac{n}{3^k}) + \sum_{i =0}^{k-1}3^i\frac{\sqrt{n/3^i}}{log(n/3^i)} \\
+            &= 3^kT(0) + \sum_{i =0}^{k-1}3^i\frac{\sqrt{n/3^i}}{log(n/3^i)}\\
+            &= \sum_{i =0}^{k-1}3^i\frac{\sqrt{n/3^i}}{log(n/3^i)}\\
+            &= \sum_{i =0}^{k-1}3^i\frac{\sqrt{n/3^i}}{log(n/3^i)} \leq 3^{log(n)}\\
+            \in O(3^{log(n)})
+        \end{align*}
         \item $T(n) = T(n - 3) +n$
+        \begin{equation*}
+            n = 3k
+        \end{equation*}
+        \begin{align*}
+            T(n) &= T(n -3) + n\\
+            T(n-1) &= T(n-4) + n\\
+            T(n-3) &= T(n-6) + n\\
+            &= T(n-6) + 2n\\
+            &= T(n-3k) + kn\\
+            &= T(n-3\frac{n}{3}) + \frac{n}{3}n\\
+            &= T(0) + \frac{n}{3}n\\
+            &= \frac{n^2}{3}\\
+            &\in O(n^2)
+        \end{align*}
     \end{enumerate}
     \item  Modify the algorithm for multiplying two numbers $X$ and $Y$(that with complexity $n^{1,59}$), dividing each number in three parts. Describe the algorithm and derive its complexity. Is it better than dividing by two parts? Explain.
     \item The run time of an algorithm $A$ for solving a problem is given by the recurrence $T(n) = 7T(n/4) + n.$ A different algorithm $A^{\prime}$ for solving the same problem has a running time given by $T^{\prime}(n) =aT^{\prime}(n/7) +n$. Determine  the  integer  value $a$ with  which  algorithm $A$ is  better  than  algorithm $A^{\prime}$.  Explain  your process.
