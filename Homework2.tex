@@ -156,7 +156,19 @@ Solve the following problems:
         \end{align*}
     \end{enumerate}
     \item  Modify the algorithm for multiplying two numbers $X$ and $Y$(that with complexity $n^{1,59}$), dividing each number in three parts. Describe the algorithm and derive its complexity. Is it better than dividing by two parts? Explain.
+
+    The algorithm would keep the same functioning as the old one, the only difference being how it's divided. As such, the recurrence would be
+
+    \begin{align*}
+        T(n) = 8T(n/3) + kn
+    \end{align*}
+
+    Which results in a complexity $O(n^{1.893})$ which would result in worst performance than using a two parts split
+
     \item The run time of an algorithm $A$ for solving a problem is given by the recurrence $T(n) = 7T(n/4) + n.$ A different algorithm $A^{\prime}$ for solving the same problem has a running time given by $T^{\prime}(n) =aT^{\prime}(n/7) +n$. Determine  the  integer  value $a$ with  which  algorithm $A$ is  better  than  algorithm $A^{\prime}$.  Explain  your process.
+
+    By the use of the master theorem, we know that $T(n) \in O(n^{1.404})$ and $T'(n) \in O(n)$, so only when $n = 1$ the algorithms are going to make the same number of steps.
+
     \item For each of the following algorithms, which each receive an integer as input, determine what they do,establish the corresponding recurrence,and solve it to find the computational complexity.
     \begin{lstlisting}
     ALGORITHM BR(n)
@@ -165,6 +177,8 @@ Solve the following problems:
         else return BR(floor(n/2)) + 1
     \end{lstlisting}
 
+    This algorithm returns the power of 2 closest to the input number, without surpassing it. The recurrence would be: $T(n) = T(n/2) + 1$, which complexity would be $O(log(n))$
+
     \begin{lstlisting}
     ALGORITHM Question(n)
         // Input a positive integer n
@@ -172,6 +186,42 @@ Solve the following problems:
         else return Question(n-1) + n*n*n
     \end{lstlisting}
 
+    This algorithm gives us the sum of the cubes of all numbers until n. As such, the recurrence would be $T(n) = T(n - 1) + n^3$, which results in complexity of $O(n^4)$
+    \begin{align*}
+        n = k
+        T(n) &= T(n - 1) + n^3\\
+        T(n - 1 ) &= T(n - 2) + 2n^3\\
+        T(n) &= T(n - k) + kn^3\\
+        T(n) &= T(0) + n^4\\
+        \in O(n^4)
+    \end{align*}
+
     \item The Towers of Hanoi problem is often used as an example when teaching recursion. Six disks of different sizes are piled on a peg in order by size, with the largest at the bottom. There are two empty pegs. The problem is to move all the disks to the third peg by moving only one at a time a never placing a disk on top of a smaller one. The second peg may be used for intermediate moves. The usual solution recursively moves all but the last disk from the starting peg to the spare peg, then moves the remaining disks on the start peg to the destination peg, and then recursively moves all the others from the spare peg to the destination peg. Illustrate these steps and explain the procedure in a pseudocode. Write a recurrence equation to determine the number of moves done and solve it.
+
+    The solution proposed would be fairly easy to implement following the next pseudocode:
+    \begin{lstlisting}
+    Towers(disk, source, destination, auxiliar)
+        //Disk is the number of the disk to be moved, source is the starting
+        point, destination is the goal and auxiliar is the spare peg
+        if (disk == 1)
+            move(disk, destination)
+        else
+            Towers(n - 1, source, auxiliar, destination)
+            move(disk, destination)
+            Towers(n - 1, auxiliar, destination, source)
+    \end{lstlisting}
+
+    \begin{align*}
+        T(1) &= 1\\
+        n &= k +1\\
+        T(n) &= 2T(n-1)\\
+        &= 2^2T(n-2)\\
+        &= 2^kT(n-k)\\
+        &= 2^{n-1}T(n-(n -1))\\
+        &= 2^{n-1}T(1)\\
+        &= 2^{n-1}\\
+        &\in \theta(2^{n-1})
+    \end{align*}
+
 \end{enumerate}
 \end{document}
