@@ -1,0 +1,94 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{tikz}
+    \usepackage{fancyhdr}
+    \usepackage{listings}
+    \usepackage{multicol}
+    \usepackage{polynom}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Edgar Jacob Rivera Rios - A01184125}
+
+\begin{document}
+\begin{titlepage}
+
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+    \center % Center everything on the page
+
+    %----------------------------------------------------------------------------------------
+    %	HEADING SECTIONS
+    %----------------------------------------------------------------------------------------
+
+    \textsc{\LARGE Tecnológico de Monterrey}\\[1.5cm] % Name of your university/college
+    \textsc{\Large Fundamentos de computación}\\[0.5cm] % Major heading such as course name
+    %\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+    %----------------------------------------------------------------------------------------
+    %	TITLE SECTION
+    %----------------------------------------------------------------------------------------
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries Homework 11}\\[0.4cm] % Title of your document
+    \HRule \\[1.5cm]
+
+    %----------------------------------------------------------------------------------------
+    %	AUTHOR SECTION
+    %----------------------------------------------------------------------------------------
+
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+    \emph{Student:}\\
+    Jacob \textsc{Rivera} % Your name
+    \end{flushleft}
+    \end{minipage}
+    ~
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushright} \large
+    \emph{Professor:} \\
+    Dr. Hugo \textsc{Terashima} % Supervisor's Name
+    \end{flushright}
+    \end{minipage}\\[2cm]
+
+    % If you don't want a supervisor, uncomment the two lines below and remove the section above
+    %\Large \emph{Author:}\\
+    %John \textsc{Smith}\\[3cm] % Your name
+
+    %----------------------------------------------------------------------------------------
+    %	DATE SECTION
+    %----------------------------------------------------------------------------------------
+
+    {\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+    %----------------------------------------------------------------------------------------
+    %	LOGO SECTION
+    %----------------------------------------------------------------------------------------
+
+    \includegraphics[width=0.4\textwidth,height=\textheight,keepaspectratio]{logo-tec-negro.png} % Include a department/university logo - this will require the graphicx package
+
+    %----------------------------------------------------------------------------------------
+
+    \vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+\section{Problems}
+Solve the following problems:
+\begin{enumerate}
+    \item Provide a parallel algorithm for merging two lists of $n/2$ keys each. State the number of processors used and compute the metrics $S_p$, $E_p$ and $R_p$.
+    \item Given the binary fan-in technique described in class to calculate the maximum of $n$ numbers, calculate its speed-up ratio and its efficiency with respect to the sequential tournament version of the algorithm.
+    \item Prove (and provide an example) that the multiplication of two $n \times n$ matrices can be conducted by a PRAM program in $O(\text{log}_2 n)$ steps if $n^3$ processors are available.
+    \item Let a binary operation take $k$ cycles to complete when done serially. If this operation is pipelined using a $k$-segment pipe, show that the resulting speed-up in computing $n$ operations is
+    \begin{equation*}
+        S_k = \frac{nk}{n + k - 1}
+    \end{equation*}
+    
+\end{enumerate}
+\end{document}
