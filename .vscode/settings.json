@@ -1,3 +1,13 @@
 {
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "cSpell.words": [
+        "Fundamentos",
+        "Kruskal",
+        "Tecnológico",
+        "Terashima",
+        "biconnected",
+        "computación",
+        "graphicx",
+        "serrato"
+    ]
 }
