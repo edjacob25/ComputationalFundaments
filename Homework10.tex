@@ -78,6 +78,32 @@
     \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
-\section{Problems}
+\section{Results}
 
+This table presents the results of 10 perceptrons with different seeds. The accuracy of the perceptron is measured between 0 and 1.
+
+\begin{center}
+    \begin{tabular}{| c | c |}
+        \hline
+        seed & accuracy \\
+        \hline
+        897	& 1 \\
+        8486 & 1 \\
+        5814 & 1 \\
+        6440 & 1 \\
+        708 & 1 \\
+        2904 & 1 \\
+        7223 & 1 \\
+        7884 & 1 \\
+        5986 & 1 \\
+        9561 & 1 \\
+        \hline
+    \end{tabular}
+\end{center}
+\subsection*{What can you conclude from the results? Is it possible to replicate the behaviour of this cipher(to decrypt) by using a neural network?}
+The results had an appaling perfection even using random seeds, which means that all of these neural networks can do the work of the encrypt function without the decided key. And by splitting the datasets in inverse maner, you could train a neural network to decrypt the data as well.
+\section{Challenge}
+We could observe that the weights matrix is the part which stores the majority of the information, as such, we can see that one value of each one of columns is predominant above all of the others. If we take the index of each one of this dominant values, we see that none is repeated. And when tested with our choosen dataset, we saw that this indexes represented the key + 1. So in order to obtain the key for a similar problem, we only have to obtain the index of each dominant value of the columns and substrac 1 to each one.
+The key obtained from the challenge is:
+\[\{22, 12, 9, 6, 24, 3, 15, 18, 20, 19, 14, 21, 13, 8, 2, 17, 11, 0, 7, 4, 23, 10, 5, 16, 1\}\]
 \end{document}
