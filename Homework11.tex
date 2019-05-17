@@ -83,12 +83,28 @@
 Solve the following problems:
 \begin{enumerate}
     \item Provide a parallel algorithm for merging two lists of $n/2$ keys each. State the number of processors used and compute the metrics $S_p$, $E_p$ and $R_p$.
+
+    A simple parallel algorithm would use one processor per list and would then use each one to read and write the list separately. Depending on how it must be merged, you could just adjust the algorithm to not create conflicts in writing. The speedup would be $S_p = 2$, $E_p = 1$ and $R_p = 1$.
+
     \item Given the binary fan-in technique described in class to calculate the maximum of $n$ numbers, calculate its speed-up ratio and its efficiency with respect to the sequential tournament version of the algorithm.
+
+    \begin{equation*}
+        S_p = \frac{n -1}{\text{log} n}
+    \end{equation*}
+    \begin{equation*}
+        E_p = \frac{\frac{n}{\text{log} n}}{n / 2} = \frac{2}{\text{log} n} \rightarrow 0
+    \end{equation*}
+
     \item Prove (and provide an example) that the multiplication of two $n \times n$ matrices can be conducted by a PRAM program in $O(\text{log}_2 n)$ steps if $n^3$ processors are available.
+
+    Each $c_{ij} = \sum_{k=1..n} a_{ik} b_{kj}$ can be computed by using n processors in $O(\text{log} n)$. To avoid clashes in reads, the data must be copied by the other processors, also in $O(\text{log} n)$
+
     \item Let a binary operation take $k$ cycles to complete when done serially. If this operation is pipelined using a $k$-segment pipe, show that the resulting speed-up in computing $n$ operations is
     \begin{equation*}
         S_k = \frac{nk}{n + k - 1}
     \end{equation*}
-    
+
+    The time of the serial algorithm can be calculated by $nk$, which are the total cycles needed by $n$ operations. The cost of splitting the operations is equal to the number of operations, that is, $n - 1$. The number of cycles in each processor is the same for the calculations, so $k$. So the total time in the parallel algorithm would be equal to $n + k -1$. So we can deduce that the speedup $S_k = \frac{nk}{n + k -1}$.
+
 \end{enumerate}
 \end{document}
