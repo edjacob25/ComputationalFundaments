@@ -13,7 +13,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{A0118 - A01184125}
+\rhead{A01184843 - A01184125}
 
 \begin{document}
 \begin{titlepage}
@@ -100,10 +100,10 @@ This table presents the results of 10 perceptrons with different seeds. The accu
         \hline
     \end{tabular}
 \end{center}
-\subsection*{What can you conclude from the results? Is it possible to replicate the behaviour of this cipher(to decrypt) by using a neural network?}
-The results had an appaling perfection even using random seeds, which means that all of these neural networks can do the work of the encrypt function without the decided key. And by splitting the datasets in inverse maner, you could train a neural network to decrypt the data as well.
+\subsection*{What can you conclude from the results? Is it possible to replicate the behavior of this cipher(to decrypt) by using a neural network?}
+The results had an appalling perfection even using random seeds, which means that all of these neural networks can do the work of the encrypt function without the decided key. And by splitting the datasets in inverse manner, you could train a neural network to decrypt the data as well.
 \section{Challenge}
-We could observe that the weights matrix is the part which stores the majority of the information, as such, we can see that one value of each one of columns is predominant above all of the others. If we take the index of each one of this dominant values, we see that none is repeated. And when tested with our choosen dataset, we saw that this indexes represented the key + 1. So in order to obtain the key for a similar problem, we only have to obtain the index of each dominant value of the columns and substrac 1 to each one.
+We could observe that the weights matrix is the part which stores the majority of the information, as such, we can see that one value of each one of columns is predominant above all of the others. If we take the index of each one of this dominant values, we see that none is repeated. And when tested with our chosen dataset, we saw that this indexes represented the key + 1. So in order to obtain the key for a similar problem, we only have to obtain the index of each dominant value of the columns and subtract 1 to each one.
 The key obtained from the challenge is:
 \[\{22, 12, 9, 6, 24, 3, 15, 18, 20, 19, 14, 21, 13, 8, 2, 17, 11, 0, 7, 4, 23, 10, 5, 16, 1\}\]
 \end{document}
