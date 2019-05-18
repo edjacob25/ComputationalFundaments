@@ -1,6 +1,7 @@
 package BinPacking.Problem;
 
 import BinPacking.Utils.Files;
+
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -8,6 +9,7 @@ import java.util.StringTokenizer;
  * Provides the methods to create and solve the one dimensional class
  * constrained bin packing problem.
  * <p>
+ *
  * @author José Carlos Ortiz Bayliss (jcobayliss@tec.mx)
  * @version 1.0
  */
@@ -20,6 +22,7 @@ public class BinPackingProblem {
     /**
      * Creates a new instance of <code>BinPackingProblem</code>.
      * <p>
+     *
      * @param fileName The name of the file that contains this instance.
      */
     public BinPackingProblem(String fileName) {
@@ -66,6 +69,7 @@ public class BinPackingProblem {
     /**
      * Returns the maximum capacity of the bins in this bin packing problem.
      * <p>
+     *
      * @return The maximum capacity of the bins in this bin packing problem.
      */
     public int getMaxCapacity() {
@@ -75,6 +79,7 @@ public class BinPackingProblem {
     /**
      * Returns the maximum number of different colors of the items packed in this bin packing problem.
      * <p>
+     *
      * @return The maximum number of different colors of the items packed in this bin packing problem.
      */
     public int getMaxColors() {
@@ -84,6 +89,7 @@ public class BinPackingProblem {
     /**
      * Returns the number of items in this bin packing problem.
      * <p>
+     *
      * @return The number of items in this bin packing problem.
      */
     public int getNbItems() {
@@ -93,6 +99,7 @@ public class BinPackingProblem {
     /**
      * Returns the name of the file that contains this instance.
      * <p>
+     *
      * @return The name of the file that contains this instance.
      */
     public String getFileName() {
@@ -102,6 +109,7 @@ public class BinPackingProblem {
     /**
      * Returns the items in this bin packing problem.
      * <p>
+     *
      * @return The items in this bin packing problem.
      */
     public Item[] getItems() {
@@ -114,6 +122,7 @@ public class BinPackingProblem {
     /**
      * Returns the string representation of this bin packing problem.
      * <p>
+     *
      * @return The string representation of this bin packing problem.
      */
     public String toString() {

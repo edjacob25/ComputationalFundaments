@@ -8,6 +8,7 @@ import java.io.IOException;
 /**
  * Provides the methods to save and load text files.
  * <p>
+ *
  * @author José Carlos Ortiz Bayliss (jcobayliss@tec.mx)
  * @version 1.0
  */
@@ -16,6 +17,7 @@ public abstract class Files {
     /**
      * Reads a text file and returns a string with its contents.
      * <p>
+     *
      * @param fileName The name of the text file to be read.
      * @return A string with the contents of the text file.
      */
@@ -44,7 +46,8 @@ public abstract class Files {
     /**
      * Saves a string to a text file.
      * <p>
-     * @param string The string to be saved.
+     *
+     * @param string   The string to be saved.
      * @param fileName The file where the string will be saved.
      */
     public static void save(String string, String fileName) {

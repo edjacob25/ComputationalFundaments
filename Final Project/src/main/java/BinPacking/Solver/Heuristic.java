@@ -4,6 +4,7 @@ package BinPacking.Solver;
  * Defines the available heuristics to solve the one dimensional class
  * constrained bin packing problem.
  * <p>
+ *
  * @author José Carlos Ortiz Bayliss (jcobayliss@tec.mx)
  * @version 1.0
  */

@@ -1,9 +1,8 @@
-
-
-import BinPacking.Solver.HyperHeuristic;
-import BinPacking.Solver.Heuristic;
-import BinPacking.Solver.Feature;
 import BinPacking.Solver.BinPackingSolver;
+import BinPacking.Solver.Feature;
+import BinPacking.Solver.Heuristic;
+import BinPacking.Solver.HyperHeuristic;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -11,25 +10,27 @@ import java.util.Random;
  * Provides the methods to create and handle a simple hyper-heuristic for
  * solving the one dimensional class constrained bin packing problem.
  * <p>
+ *
  * @author José Carlos Ortiz Bayliss (jcobayliss@tec.mx)
  * @version 1.0
  */
 public class SampleHyperHeuristic extends HyperHeuristic {
-    
+
     private final double[][] conditions;
 
     /**
      * Creates a new instance of <code>SampleHyperHeuristic</code>.
      * <p>
-     * @param features The features to be used to characterize the problem
-     * instances.
+     *
+     * @param features   The features to be used to characterize the problem
+     *                   instances.
      * @param heuristics The heuristics available for the hyper-heuristic.
-     * @param seed The seed to initialize the random number generator in this
-     * hyper-heuristic.
+     * @param seed       The seed to initialize the random number generator in this
+     *                   hyper-heuristic.
      */
     public SampleHyperHeuristic(Feature[] features, Heuristic[] heuristics, long seed) {
         super(features, heuristics);
-        Random random;        
+        Random random;
         conditions = new double[heuristics.length][];
         random = new Random(seed);
         for (int i = 0; i < heuristics.length; i++) {
@@ -58,7 +59,7 @@ public class SampleHyperHeuristic extends HyperHeuristic {
         minDistance = Double.MAX_VALUE;
         heuristic = null;
         for (int i = 0; i < conditions.length; i++) {
-            distance = getDistance(state, conditions[i]);            
+            distance = getDistance(state, conditions[i]);
             if (distance < minDistance) {
                 minDistance = distance;
                 heuristic = heuristics[i];
@@ -76,11 +77,12 @@ public class SampleHyperHeuristic extends HyperHeuristic {
         }
         return string.toString().trim();
     }
-    
+
     /**
      * Returns the Euclidian distance between the condition of a rule in the hyper-heuristic and the current problem state.
      * <p>
-     * @param state The current problem state.
+     *
+     * @param state     The current problem state.
      * @param condition The condition of a rule in the hyper-heuristic.
      * @return The Euclidian distance between the condition of a rule in the
      * hyper-heuristic and the current problem state.

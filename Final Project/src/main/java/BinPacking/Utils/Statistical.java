@@ -3,6 +3,7 @@ package BinPacking.Utils;
 /**
  * Provides a small set of statistical functions.
  * <p>
+ *
  * @author José Carlos Ortiz Bayliss (jcobayliss@tec.mx)
  * @version 1.0
  */
@@ -11,6 +12,7 @@ public abstract class Statistical {
     /**
      * Returns the mean of the values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The mean of the values provided as argument.
      */
@@ -24,10 +26,11 @@ public abstract class Statistical {
         }
         return mean / values.length;
     }
-       
+
     /**
      * Returns the standard deviation of the values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The standard deviation of the values provided as argument.
      */
@@ -48,11 +51,12 @@ public abstract class Statistical {
     /**
      * Returns the median of a values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The median of the values provided as argument.
      */
     public static double median(double[] values) {
-        double median;        
+        double median;
         double orderedValues[];
         /*
          * Safety check.
@@ -72,6 +76,7 @@ public abstract class Statistical {
     /**
      * Sorts the values provided as argument.
      * <p>
+     *
      * @param values The values to sort.
      * @return The values sorted in ascending order.
      */
@@ -103,6 +108,7 @@ public abstract class Statistical {
     /**
      * Returns the maximum value in the values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The maximum value in the values provided as argument.
      */
@@ -126,6 +132,7 @@ public abstract class Statistical {
     /**
      * Returns the minimum value in the values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The minimum value in the values provided as argument.
      */
@@ -149,11 +156,12 @@ public abstract class Statistical {
     /**
      * Returns the range of the values provided as argument.
      * <p>
+     *
      * @param values The values to analyze.
      * @return The range of the values provided as argument.
      */
     public static double range(double[] values) {
         return max(values) - min(values);
     }
-        
+
 }
