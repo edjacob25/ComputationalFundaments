@@ -20,7 +20,6 @@ object Run {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val hyperHeuristic: HyperHeuristic
         /*
          * Calculates the initial states of a set of problem instances by using some specific features.
          */
@@ -36,10 +35,12 @@ object Run {
         /*
          * Creates a sample hyper-heuristic.
          */
-        hyperHeuristic = SampleHyperHeuristic(
+        val parameters = BeesParameters(6,10,2,1,0.5,0.1,2,3)
+
+        val hyperHeuristic = Bees(
                 arrayOf(Feature.AVGL, Feature.STDL, Feature.SMALL, Feature.VSMALL, Feature.LARGE, Feature.VLARGE, Feature.COLORC, Feature.OBINS, Feature.AVGW, Feature.COLORF),
                 arrayOf(Heuristic.FIRST_FIT, Heuristic.FIRST_FIT_SC, Heuristic.FIRST_FIT_DC, Heuristic.BEST_FIT, Heuristic.BEST_FIT_SC, Heuristic.BEST_FIT_DC, Heuristic.WORST_FIT, Heuristic.WORST_FIT_SC, Heuristic.WORST_FIT_DC, Heuristic.ALMOST_WORST_FIT, Heuristic.ALMOST_WORST_FIT_SC, Heuristic.ALMOST_WORST_FIT_DC),
-                1825 // Change this value to generate a different hyper-heuristic.
+                1825, parameters // Change this value to generate a different hyper-heuristic.
         )
         println(hyperHeuristic)
         /*
@@ -64,13 +65,10 @@ object Run {
      * instances.
      */
     private fun characterizeSet(folder: String, fileName: String, features: Array<Feature>) {
-        val string: StringBuilder
-        val format: DecimalFormat
-        val set: BinPackingProblemSet
+        val string: StringBuilder = StringBuilder()
+        val format = DecimalFormat("0.0000")
+        val set = BinPackingProblemSet(folder)
         var solver: BinPackingSolver
-        string = StringBuilder()
-        set = BinPackingProblemSet(folder)
-        format = DecimalFormat("0.0000")
         /*
          * Prints the header of the file.
          */
@@ -107,13 +105,10 @@ object Run {
      * instances.
      */
     private fun solveSet(folder: String, fileName: String, heuristics: Array<Heuristic>) {
-        val string: StringBuilder
-        val format: DecimalFormat
-        val set: BinPackingProblemSet
+        val string: StringBuilder = StringBuilder()
+        val format = DecimalFormat("0.0000")
+        val set = BinPackingProblemSet(folder)
         var solver: BinPackingSolver
-        string = StringBuilder()
-        set = BinPackingProblemSet(folder)
-        format = DecimalFormat("0.0000")
         /*
          * Prints the header of the file.
          */
@@ -151,13 +146,10 @@ object Run {
      * instances.
      */
     private fun solveSet(folder: String, fileName: String, hyperHeuristic: HyperHeuristic) {
-        val string: StringBuilder
-        val format: DecimalFormat
-        val set: BinPackingProblemSet
+        val string = StringBuilder()
+        val format = DecimalFormat("0.0000")
+        val set = BinPackingProblemSet(folder)
         var solver: BinPackingSolver
-        string = StringBuilder()
-        set = BinPackingProblemSet(folder)
-        format = DecimalFormat("0.0000")
         /*
          * Prints the header of the file.
          */
