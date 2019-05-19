@@ -11,13 +11,14 @@ class Bees(
         heuristics: Array<out Heuristic>?,
         seed: Int,
         private val params: BeesParameters,
-        private val trainingSet : String
+        trainingSet : String
 ) : HyperHeuristic(features, heuristics) {
 
     private val random = Random(seed)
+    private val problems = BinPackingProblemSet(trainingSet)
+
     private var best: Pair<Array<DoubleArray>, Double> = Pair(createRandomBee(), Double.MAX_VALUE)
     init {
-        val problems = BinPackingProblemSet(trainingSet)
         var population = (0 until params.numOfBees)
                 .map { Pair(createRandomBee(), 0.0) }
                 .toMutableList()
@@ -32,7 +33,7 @@ class Bees(
             // Select the best of exists
             if (population[0].second < best.second) {
                 best = population[0]
-                println("Best now is ${best.first}")
+                println("Best now is ${best.first} with cost ${best.second}")
             }
 
             val nextGen = mutableListOf<Pair<Array<DoubleArray>, Double>>()
@@ -56,7 +57,7 @@ class Bees(
 
         val chosen = best.first
                 .mapIndexed { index, array -> Pair(index, calculateDistance(array, state)) }
-                .maxBy { it.second }!!.first
+                .minBy { it.second }!!.first
 
         return heuristics[chosen]
     }
@@ -88,7 +89,18 @@ class Bees(
     }
 
     private fun evaluate(bee: Array<DoubleArray>): Double {
-       return random.nextDouble()
+        val results = mutableListOf<Double>()
+        for (problem in problems.instances){
+            val solver = BinPackingSolver(problem)
+            val state = features.map { solver.getFeature(it) }.toDoubleArray()
+
+            val chosen = bee
+                    .mapIndexed { index, array -> Pair(index, calculateDistance(array, state)) }
+                    .minBy { it.second }!!.first
+            solver.solve(heuristics[chosen])
+            results.add(solver.getFeature(Feature.AVGW))
+        }
+       return results.sum()
     }
 
     private fun createRandomBee(): Array<DoubleArray> {

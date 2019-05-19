@@ -35,12 +35,13 @@ object Run {
         /*
          * Creates a sample hyper-heuristic.
          */
-        val parameters = BeesParameters(6,10,2,1,0.5,0.1,2,3)
+        val parameters = BeesParameters(45,20,4,2,0.5,0.1,2,7)
+
 
         val hyperHeuristic = Bees(
                 arrayOf(Feature.AVGL, Feature.STDL, Feature.SMALL, Feature.VSMALL, Feature.LARGE, Feature.VLARGE, Feature.COLORC, Feature.OBINS, Feature.AVGW, Feature.COLORF),
                 arrayOf(Heuristic.FIRST_FIT, Heuristic.FIRST_FIT_SC, Heuristic.FIRST_FIT_DC, Heuristic.BEST_FIT, Heuristic.BEST_FIT_SC, Heuristic.BEST_FIT_DC, Heuristic.WORST_FIT, Heuristic.WORST_FIT_SC, Heuristic.WORST_FIT_DC, Heuristic.ALMOST_WORST_FIT, Heuristic.ALMOST_WORST_FIT_SC, Heuristic.ALMOST_WORST_FIT_DC),
-                1825, parameters // Change this value to generate a different hyper-heuristic.
+                1825, parameters, "Instances/Training"  // Change this value to generate a different hyper-heuristic.
         )
         println(hyperHeuristic)
         /*
