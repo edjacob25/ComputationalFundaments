@@ -11,13 +11,14 @@ class Bees(
         heuristics: Array<out Heuristic>?,
         seed: Int,
         private val params: BeesParameters,
-        trainingSet : String
+        trainingSet: String
 ) : HyperHeuristic(features, heuristics) {
 
     private val random = Random(seed)
     private val problems = BinPackingProblemSet(trainingSet)
 
     private var best: Pair<Array<DoubleArray>, Double> = Pair(createRandomBee(), Double.MAX_VALUE)
+
     init {
         var population = (0 until params.numOfBees)
                 .map { Pair(createRandomBee(), 0.0) }
@@ -45,7 +46,7 @@ class Bees(
             nextGen.addAll(createScoutBees(params.numOfBees - params.bestBees))
             population = nextGen
 
-            if ( params.patchSize > 0.1 && params.patchDecrementPossibility > random.nextDouble()) {
+            if (params.patchSize > 0.1 && params.patchDecrementPossibility > random.nextDouble()) {
                 params.patchSize = params.patchSize - 0.05
             }
         }
@@ -62,7 +63,7 @@ class Bees(
         return heuristics[chosen]
     }
 
-    private fun calculateDistance(feature: DoubleArray, actual: DoubleArray ): Double{
+    private fun calculateDistance(feature: DoubleArray, actual: DoubleArray): Double {
         var sum = 0.0
         for (i in features.indices) {
             sum += Math.pow(feature[i] - actual[i], 2.0)
@@ -90,7 +91,7 @@ class Bees(
 
     private fun evaluate(bee: Array<DoubleArray>): Double {
         val results = mutableListOf<Double>()
-        for (problem in problems.instances){
+        for (problem in problems.instances) {
             val solver = BinPackingSolver(problem)
             val state = features.map { solver.getFeature(it) }.toDoubleArray()
 
@@ -100,11 +101,11 @@ class Bees(
             solver.solve(heuristics[chosen])
             results.add(solver.getFeature(Feature.AVGW))
         }
-       return results.sum()
+        return results.sum()
     }
 
     private fun createRandomBee(): Array<DoubleArray> {
-        val result = Array(heuristics.size) { DoubleArray(features.size)}
+        val result = Array(heuristics.size) { DoubleArray(features.size) }
         for (i in 0 until heuristics.size) {
             for (j in 0 until features.size) {
                 result[i][j] = random.nextDouble()
@@ -124,4 +125,7 @@ class Bees(
 
 data class BeesParameters(val numOfBees: Int, val generations: Int, val bestBees: Int, val eliteBees: Int,
                           var patchSize: Double, val patchDecrementPossibility: Double,
-                          val descendantsOfBestBees: Int, val descendantsOfEliteBees: Int)
+                          val descendantsOfBestBees: Int, val descendantsOfEliteBees: Int) {
+    override fun toString(): String =
+            "nb${numOfBees}_g${generations}_bb${bestBees}_eb${eliteBees}_dbb${bestBees}_deb$descendantsOfEliteBees$"
+}

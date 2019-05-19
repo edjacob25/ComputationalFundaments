@@ -1,11 +1,9 @@
-import BinPacking.Problem.BinPackingProblem
 import BinPacking.Solver.BinPackingSolver
 import BinPacking.Solver.Feature
 import BinPacking.Solver.Heuristic
 import BinPacking.Solver.HyperHeuristic
 import BinPacking.Utils.BinPackingProblemSet
 import BinPacking.Utils.Files
-
 import java.text.DecimalFormat
 
 /**
@@ -20,38 +18,47 @@ object Run {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val features = arrayOf(Feature.AVGL, Feature.STDL, Feature.SMALL, Feature.VSMALL, Feature.LARGE,
+                Feature.VLARGE, Feature.COLORC, Feature.OBINS, Feature.AVGW, Feature.COLORF)
+
+        val heuristics = arrayOf(Heuristic.FIRST_FIT, Heuristic.FIRST_FIT_SC, Heuristic.FIRST_FIT_DC,
+                Heuristic.BEST_FIT, Heuristic.BEST_FIT_SC, Heuristic.BEST_FIT_DC, Heuristic.WORST_FIT,
+                Heuristic.WORST_FIT_SC, Heuristic.WORST_FIT_DC, Heuristic.ALMOST_WORST_FIT,
+                Heuristic.ALMOST_WORST_FIT_SC, Heuristic.ALMOST_WORST_FIT_DC)
+
         /*
          * Calculates the initial states of a set of problem instances by using some specific features.
          */
-        characterizeSet("Instances/Training", "features.csv",
-                arrayOf(Feature.AVGL, Feature.STDL, Feature.SMALL, Feature.VSMALL, Feature.LARGE, Feature.VLARGE, Feature.COLORC, Feature.OBINS, Feature.AVGW, Feature.COLORF)
-        )
+        characterizeSet("Instances/Training", "features.csv", features)
+
         /*
          * Solves a set of problem instances by using some specific heuristics.
          */
-        solveSet("Instances/Training", "heuristics.csv",
-                arrayOf(Heuristic.FIRST_FIT, Heuristic.FIRST_FIT_SC, Heuristic.FIRST_FIT_DC, Heuristic.BEST_FIT, Heuristic.BEST_FIT_SC, Heuristic.BEST_FIT_DC, Heuristic.WORST_FIT, Heuristic.WORST_FIT_SC, Heuristic.WORST_FIT_DC, Heuristic.ALMOST_WORST_FIT, Heuristic.ALMOST_WORST_FIT_SC, Heuristic.ALMOST_WORST_FIT_DC)
-        )
-        /*
-         * Creates a sample hyper-heuristic.
-         */
-        val parameters = BeesParameters(45,20,4,2,0.5,0.1,2,7)
+        solveSet("Instances/Training", "heuristics.csv", heuristics)
 
+        val parametersList = listOf(BeesParameters(20, 10, 3, 1, 0.5, 0.1, 2, 4),
+                BeesParameters(20, 10, 4, 2, 0.5, 0.1, 2, 5),
+                BeesParameters(35, 20, 5, 2, 0.5, 0.1, 2, 5),
+                BeesParameters(45, 50, 5, 2, 0.5, 0.1, 2, 5),
+                BeesParameters(50, 100, 8, 2, 0.5, 0.1, 2, 7),
+                BeesParameters(100, 200, 10, 2, 0.5, 0.1, 3, 10),
+                BeesParameters(100, 500, 10, 3, 0.5, 0.1, 3, 10),
+                BeesParameters(100, 1000, 10, 3, 0.5, 0.1, 3, 10),
+                BeesParameters(100, 2000, 10, 3, 0.5, 0.1, 3, 10),
+                BeesParameters(100, 5000, 10, 3, 0.5, 0.1, 3, 10))
 
-        val hyperHeuristic = Bees(
-                arrayOf(Feature.AVGL, Feature.STDL, Feature.SMALL, Feature.VSMALL, Feature.LARGE, Feature.VLARGE, Feature.COLORC, Feature.OBINS, Feature.AVGW, Feature.COLORF),
-                arrayOf(Heuristic.FIRST_FIT, Heuristic.FIRST_FIT_SC, Heuristic.FIRST_FIT_DC, Heuristic.BEST_FIT, Heuristic.BEST_FIT_SC, Heuristic.BEST_FIT_DC, Heuristic.WORST_FIT, Heuristic.WORST_FIT_SC, Heuristic.WORST_FIT_DC, Heuristic.ALMOST_WORST_FIT, Heuristic.ALMOST_WORST_FIT_SC, Heuristic.ALMOST_WORST_FIT_DC),
-                1825, parameters, "Instances/Training"  // Change this value to generate a different hyper-heuristic.
-        )
-        println(hyperHeuristic)
-        /*
-         * Solves a set of problem instances (the ones used for training) by using the previously defined hyper-heuristic.
-         */
-        solveSet("Instances/Training", "hyperHeuristic-Training.csv", hyperHeuristic)
-        /*
-         * Solves a set of problem instances (the ones used for testing) by using the previously defined hyper-heuristic.
-         */
-        solveSet("Instances/Testing", "hyperHeuristic-Testing.csv", hyperHeuristic)
+        for ((i, parameters) in parametersList.withIndex()) {
+            val hyperHeuristic = Bees(features, heuristics, i, parameters, "Instances/Training")
+            println(hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for training) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Training", "hyperHeuristic-Training_$parameters.csv", hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for testing) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Testing", "hyperHeuristic-Testing_$parameters.csv", hyperHeuristic)
+        }
     }
 
     /**

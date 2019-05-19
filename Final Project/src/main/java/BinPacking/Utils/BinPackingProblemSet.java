@@ -39,9 +39,9 @@ public class BinPackingProblemSet {
         i = 0;
         instances = new BinPackingProblem[fileNames.size()];
         for (String fileName : fileNames) {
-            System.out.print("Loading \'" + folder + "/" + fileName + "\'...");
+            // System.out.print("Loading \'" + folder + "/" + fileName + "\'...");
             instances[i++] = new BinPackingProblem(folder + "/" + fileName);
-            System.out.println(" done.");
+            // System.out.println(" done.");
         }
     }
 
