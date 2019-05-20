@@ -59,6 +59,34 @@ object Run {
              */
             solveSet("Instances/Testing", "hyperHeuristic-Testing_$parameters.csv", hyperHeuristic)
         }
+
+        for ((i, parameters) in parametersList.withIndex()) {
+            parameters.numOfBees= parameters.numOfBees / 2
+            val hyperHeuristic = Bees(features, heuristics, i, parameters, "Instances/Training")
+            println(hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for training) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Training", "hyperHeuristic-Training_$parameters.csv", hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for testing) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Testing", "hyperHeuristic-Testing_$parameters.csv", hyperHeuristic)
+        }
+
+        for ((i, parameters) in parametersList.withIndex()) {
+            parameters.numOfBees= parameters.numOfBees * 2
+            val hyperHeuristic = Bees(features, heuristics, i, parameters, "Instances/Training")
+            println(hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for training) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Training", "hyperHeuristic-Training_$parameters.csv", hyperHeuristic)
+            /*
+             * Solves a set of problem instances (the ones used for testing) by using the previously defined hyper-heuristic.
+             */
+            solveSet("Instances/Testing", "hyperHeuristic-Testing_$parameters.csv", hyperHeuristic)
+        }
     }
 
     /**

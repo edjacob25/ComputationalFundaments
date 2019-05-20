@@ -123,9 +123,9 @@ class Bees(
     }
 }
 
-data class BeesParameters(val numOfBees: Int, val generations: Int, val bestBees: Int, val eliteBees: Int,
+data class BeesParameters(var numOfBees: Int, val generations: Int, val bestBees: Int, val eliteBees: Int,
                           var patchSize: Double, val patchDecrementPossibility: Double,
                           val descendantsOfBestBees: Int, val descendantsOfEliteBees: Int) {
     override fun toString(): String =
-            "nb${numOfBees}_g${generations}_bb${bestBees}_eb${eliteBees}_dbb${bestBees}_deb$descendantsOfEliteBees$"
+            "nb${numOfBees}_g${generations}_bb${bestBees}_eb${eliteBees}_dbb${bestBees}_deb$descendantsOfEliteBees"
 }
